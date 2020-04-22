@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import React from 'react';
 import App from './containers';
 import 'harmoware-vis/scss/harmoware.scss';
+import './scss/sumo_fcd.scss';
 
 const store = createStore(getCombinedReducer());
 

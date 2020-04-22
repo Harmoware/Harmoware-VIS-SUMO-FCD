@@ -16,7 +16,7 @@ export default class Controller extends React.Component {
             <li className="flex_row">
                 <div className="harmovis_input_button_column">
                 <label htmlFor="MovesInput">
-                SUMO FCD DATA<MovesInput actions={actions} id="MovesInput" />
+                sumo fcd data<MovesInput actions={actions} id="MovesInput" />
                 </label>
                 <div>{movesFileName}</div>
                 </div>

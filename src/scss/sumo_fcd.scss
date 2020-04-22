@@ -1,0 +1,25 @@
+@import 'harmoware-vis/scss/harmoware.scss';
+
+div.harmovis_controller {
+  @extend .harmovis_controller;
+  width: 260px;
+  ul {
+    @extend ul.flex_list;
+  }
+  li.bus3d_input_button_column {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    button {
+      @extend .harmovis_button;
+    }
+    div {
+      white-space: nowrap;
+      overflow: hidden;
+      text-Overflow: ellipsis;
+    }
+  }
+  button.harmovis_button {
+    width: 100%;  
+  }
+}
