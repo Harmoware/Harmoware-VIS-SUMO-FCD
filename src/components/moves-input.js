@@ -29,7 +29,6 @@ export const MovesInput = (props)=>{
             }
             actions.setInputFilename({ movesFileName: file_name });
             actions.setMovesBase(readdata);
-            actions.setDefaultViewport();
             actions.setRoutePaths([]);
             actions.setClicked(null);
             actions.setAnimatePause(false);
