@@ -1,4 +1,4 @@
-# harmoware-demo
+# Harmoware-VIS-SUMO-FDC
 
 ## Install & run
 ```
