@@ -4,7 +4,7 @@ import { createStore } from 'redux';
 
 import { Provider } from 'react-redux';
 import React from 'react';
-import App from './containers/app';
+import App from './containers';
 import 'harmoware-vis/scss/harmoware.scss';
 
 const store = createStore(getCombinedReducer());
