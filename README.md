@@ -20,7 +20,7 @@ npm start
 ```
 ## Operation
 Click the "FCD data selection" button to select the FCD data.  
-Sample data can be found in "/xml/output2.xml".
+Sample data can be found in "/xml/CentreaFcd.xml".
 
 ## License
 This project is licensed under the [Apache License 2.0](https://github.com/Harmoware/Harmoware-VIS-SUMO-FDC/blob/master/LICENSE).
