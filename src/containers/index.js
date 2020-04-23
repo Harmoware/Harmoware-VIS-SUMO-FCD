@@ -53,6 +53,21 @@ class App extends Container {
       }
     };
 
+    const vehicleColor = (x)=>{
+      if(x.vehicletype && x.vehicletype === 'BUS'){
+        return [255,255,255,255];
+      }else{
+        return [0,255,0,255];
+      }
+    }
+    const vehicleScale = (x)=>{
+      if(x.vehicletype && x.vehicletype === 'BUS'){
+        return [3,3,3];
+      }else{
+        return [1.5,1.5,1.5];
+      }
+    }
+
     return (
       <div>
         <Controller {...this.props} />
@@ -62,10 +77,12 @@ class App extends Container {
             mapboxApiAccessToken={MAPBOX_TOKEN}
             mapStyle={undefined}
             layers={[
-              new MovesLayer({ routePaths, movesbase, movedData,
+              new MovesLayer({
+                routePaths, getRouteWidth:()=>2,
+                movesbase, movedData,
                 iconDesignations:[
-                  {type:'vehicle', layer:'SimpleMesh', getColor:()=>[0,255,0,255], sizeScale:3},
-                  {type:'person', layer:'Scatterplot', getColor:()=>[255,0,0,255], getRadius:()=>3},
+                  {type:'vehicle', layer:'SimpleMesh', getColor:vehicleColor, sizeScale:1, getScale:vehicleScale},
+                  {type:'person', layer:'Scatterplot', getColor:()=>[255,0,0,255], getRadius:()=>2},
                   {type:'container', layer:'SimpleMesh', getColor:()=>[0,0,255,255], getRadius:()=>2}
                 ],
                 clickedObject, actions, optionVisible, onHover }),
