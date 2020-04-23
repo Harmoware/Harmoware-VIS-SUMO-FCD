@@ -11,7 +11,8 @@ npm install
 
 ## Setting
 Sign up for mapbox.com and get Accesstoken.  
-Set the Accesstoken to the environment variable "MAPBOX_ACCESS_TOKEN".
+Set the acquired Accesstoken to the environment variable "MAPBOX_ACCESS_TOKEN".
+
 
 ## Run
 ```
