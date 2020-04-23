@@ -1,10 +1,10 @@
-# Harmoware-VIS-SUMO-FDC
+# Harmoware-VIS-SUMO-FCD
 
 ## Install
 ```
-git clone https://github.com/Harmoware/Harmoware-VIS-SUMO-FDC.git
+git clone https://github.com/Harmoware/Harmoware-VIS-SUMO-FCD.git
 
-cd Harmoware-VIS-SUMO-FDC
+cd Harmoware-VIS-SUMO-FCD
 
 npm install
 ```
