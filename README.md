@@ -10,7 +10,7 @@ npm install
 ```
 
 ## Setting
-Sign up for mapbox.com and get Accesstoken.
+Sign up for mapbox.com and get Accesstoken.  
 Set the Accesstoken to the environment variable "MAPBOX_ACCESS_TOKEN".
 
 ## Run
@@ -18,7 +18,7 @@ Set the Accesstoken to the environment variable "MAPBOX_ACCESS_TOKEN".
 npm start
 ```
 ## Operation
-Click the "FCD data selection" button to select the FCD data.
+Click the "FCD data selection" button to select the FCD data.  
 Sample data can be found in "/xml/output2.xml".
 
 ## License
