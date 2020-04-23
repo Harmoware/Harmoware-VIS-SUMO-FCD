@@ -79,6 +79,7 @@ class App extends Container {
             layers={[
               new MovesLayer({
                 routePaths, getRouteWidth:()=>2,
+                getOrientation: (x) => x.angle ? [0,(x.angle * -1),90] : [0,0,90],
                 movesbase, movedData,
                 iconDesignations:[
                   {type:'vehicle', layer:'SimpleMesh', getColor:vehicleColor, sizeScale:1, getScale:vehicleScale},
