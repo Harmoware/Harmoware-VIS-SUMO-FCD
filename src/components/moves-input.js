@@ -2,7 +2,7 @@ import React from 'react';
 import { analyzeSumoData } from '../library';
 
 export const MovesInput = (props)=>{
-    const { actions, id, i18n, className, style } = props;
+    const { actions, id, i18n, className, style, setVehicletype } = props;
 
     const onSelect = (e)=>{
         const reader = new FileReader();
@@ -18,7 +18,7 @@ export const MovesInput = (props)=>{
         function parseXML(e){
             const xml = e.target.result;
             const parser = new DOMParser();
-            const readdata = analyzeSumoData(parser.parseFromString(xml, 'text/xml'));
+            const readdata = analyzeSumoData(parser.parseFromString(xml, 'text/xml'),setVehicletype);
             if (!Array.isArray(readdata)) { // Not Array?
                 const { movesbase } = readdata;
                 if (!movesbase) {

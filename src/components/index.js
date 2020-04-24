@@ -7,7 +7,7 @@ import { PlayButton, PauseButton, ForwardButton, ReverseButton,
 export default class Controller extends React.Component {
   render() {
     const { actions, inputFileName, animatePause, animateReverse, viewport,
-      settime, timeBegin, timeLength, secperhour } = this.props;
+      settime, timeBegin, timeLength, secperhour, setVehicletype, vehicletype } = this.props;
     const { movesFileName } = inputFileName;
 
     return (
@@ -16,7 +16,7 @@ export default class Controller extends React.Component {
             <li className="flex_row">
                 <div className="harmovis_input_button_column">
                 <label htmlFor="MovesInput">
-                FCD data selection<MovesInput actions={actions} id="MovesInput" />
+                FCD data selection<MovesInput actions={actions} id="MovesInput" setVehicletype={setVehicletype}/>
                 </label>
                 <div>{movesFileName}</div>
                 </div>

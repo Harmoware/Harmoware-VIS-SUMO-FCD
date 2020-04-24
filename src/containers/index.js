@@ -3,6 +3,8 @@ import {
   Container, connectToHarmowareVis, HarmoVisLayers, MovesLayer, LoadingIcon, FpsDisplay
 } from 'harmoware-vis';
 import Controller from '../components';
+import { color } from '../library';
+
 
 
 const MAPBOX_TOKEN = process.env.MAPBOX_ACCESS_TOKEN; //Acquire Mapbox accesstoken
@@ -11,7 +13,8 @@ class App extends Container {
   constructor(props) {
     super(props);
     this.state = {
-      popup: [0, 0, '']
+      popup: [0, 0, ''],
+      vehicletype: {}
     };
   }
 
@@ -29,6 +32,10 @@ class App extends Container {
       routePaths, movesbase, movedData, loading } = this.props;
     const optionVisible = false;
     const style = {left: '100px'};
+
+    const setVehicletype = (vehicletype)=>{
+      this.setState({vehicletype});
+    }
 
     const onHover = (el) => {
       if (el && el.object) {
@@ -54,15 +61,18 @@ class App extends Container {
     };
 
     const vehicleColor = (x)=>{
-      if(x.vehicletype && x.vehicletype === 'BUS'){
-        return [255,255,255,255];
+      const {vehicletype} = this.state;
+      if(x.vehicletype && x.vehicletype in vehicletype){
+        return vehicletype[x.vehicletype].color;
       }else{
-        return [0,255,0,255];
+        return color.lime;
       }
     }
     const vehicleScale = (x)=>{
-      if(x.vehicletype && x.vehicletype === 'BUS'){
-        return [3,3,3];
+      const {vehicletype} = this.state;
+      if(x.vehicletype && x.vehicletype in vehicletype){
+        const {scale} = vehicletype[x.vehicletype];
+        return [scale,scale,scale];
       }else{
         return [1.5,1.5,1.5];
       }
@@ -70,7 +80,7 @@ class App extends Container {
 
     return (
       <div>
-        <Controller {...this.props} />
+        <Controller {...this.props} setVehicletype={setVehicletype} vehicletype={this.state.vehicletype} />
         <div className="harmovis_area">
           <HarmoVisLayers
             viewport={viewport} actions={actions}
@@ -83,8 +93,8 @@ class App extends Container {
                 movesbase, movedData,
                 iconDesignations:[
                   {type:'vehicle', layer:'SimpleMesh', getColor:vehicleColor, sizeScale:1, getScale:vehicleScale},
-                  {type:'person', layer:'Scatterplot', getColor:()=>[255,0,0,255], getRadius:()=>2},
-                  {type:'container', layer:'SimpleMesh', getColor:()=>[0,0,255,255], getRadius:()=>2}
+                  {type:'person', layer:'Scatterplot', getColor:()=>color.maroon, getRadius:()=>2},
+                  {type:'container', layer:'SimpleMesh', getColor:()=>color.teal, getRadius:()=>2}
                 ],
                 clickedObject, actions, optionVisible, onHover }),
             ]}

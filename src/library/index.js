@@ -1,10 +1,10 @@
-export const analyzeSumoData = (inputData)=>{
+export const analyzeSumoData = (inputData,setVehicletype)=>{
     const timeBegin = Date.now();
     const root = inputData.children;
     for(let i=0; i<root.length; i=i+1) {
         const fcd = root[i];
         if(fcd.tagName === 'fcd-export'){
-            return getTimestepInfo(timeBegin,fcd);
+            return getTimestepInfo(timeBegin,fcd,setVehicletype);
         }else{
             console.log('undefined fcd.tagName => ' + fcd.tagName);
         }
@@ -12,7 +12,7 @@ export const analyzeSumoData = (inputData)=>{
     return [];
 }
 
-const getTimestepInfo = (timeBegin,fcd)=>{
+const getTimestepInfo = (timeBegin,fcd,setVehicletype)=>{
     let typeIdMap = {};
     const child = fcd.children;
     for(let i=0; i<child.length; i=i+1) {
@@ -21,7 +21,7 @@ const getTimestepInfo = (timeBegin,fcd)=>{
             const {time} = getAttributes(timestep);
             if(time){
                 const elapsedtime = timeBegin + parseFloat(time);
-                typeIdMap = getVehicleInfo(typeIdMap,timestep,elapsedtime);
+                typeIdMap = getVehicleInfo(typeIdMap,timestep,elapsedtime,setVehicletype);
             }else{
                 console.log('undefined timestep.tagName => ' + timestep.tagName);
             }
@@ -32,8 +32,11 @@ const getTimestepInfo = (timeBegin,fcd)=>{
     return Object.values(typeIdMap);
 }
 
-const getVehicleInfo = (typeIdMap,timestep,elapsedtime)=>{
+const getVehicleInfo = (typeIdMap,timestep,elapsedtime,setVehicletype)=>{
     const update = {};
+    const vehicleTypeList = {};
+    const colorList = Object.values(color);
+    let colorIdx = 0;
     const child = timestep.children;
     for(let i=0; i<child.length; i=i+1){
         const vehicle = child[i];
@@ -56,7 +59,14 @@ const getVehicleInfo = (typeIdMap,timestep,elapsedtime)=>{
                 longitude:parseFloat(x),
                 latitude:parseFloat(y),
                 ...other};
-            if(type)operation[vehicleType] = type;
+            if(type){
+                operation[vehicleType] = type;
+                if(vehicle.tagName === 'vehicle' && !(type in vehicleTypeList)){
+                    vehicleTypeList[type] = {color:colorList[colorIdx],scale:1.5};
+                    colorIdx = colorIdx + 1;
+                    if(colorIdx >= colorList.length) colorIdx = 0;
+                }
+            }
             if(speed)operation['speed'] = parseFloat(speed);
             if(angle)operation['angle'] = parseFloat(angle);
             if(pos)operation['pos'] = parseFloat(pos);
@@ -67,6 +77,7 @@ const getVehicleInfo = (typeIdMap,timestep,elapsedtime)=>{
             console.log('undefined vehicle.tagName => ' + vehicle.tagName);
         }
     }
+    setVehicletype(vehicleTypeList);
     return Object.assign({},typeIdMap,update);
 }
 
@@ -80,3 +91,20 @@ const getAttributes = (element)=>{
     }
     return attributes;
 }
+
+export const color = {
+    white: [255,255,255],
+    yellow: [255,255,0],
+    fuchsia: [255,0,255],
+    aqua: [0,255,255],
+    lime: [0,255,0],
+    red: [255,0,0],
+    blue: [0,0,255],
+    olive: [128,128,0],
+    green: [0,128,0],
+    purple: [128,0,128],
+    silver: [192,192,192],
+    gray: [128,128,128],
+    teal: [0,128,128],
+    maroon: [128,0,0]
+};
