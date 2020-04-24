@@ -1,5 +1,6 @@
 import React from 'react';
 import { MovesInput } from './moves-input.js';
+import { VehicletypeList } from './vehicletype-list.js';
 import { PlayButton, PauseButton, ForwardButton, ReverseButton,
   AddMinutesButton, NavigationButton, ElapsedTimeValue, ElapsedTimeRange,
   SpeedValue, SpeedRange } from 'harmoware-vis';
@@ -54,6 +55,7 @@ export default class Controller extends React.Component {
               <SpeedValue secperhour={secperhour} actions={actions} />sec/hour</label>
               <SpeedRange secperhour={secperhour} actions={actions} id="SpeedRange" />
             </li>
+              <VehicletypeList vehicletype={vehicletype} />
             </ul>
         </div>
     );

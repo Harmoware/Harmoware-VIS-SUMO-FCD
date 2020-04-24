@@ -36,6 +36,7 @@ const getVehicleInfo = (typeIdMap,timestep,elapsedtime,setVehicletype)=>{
     const update = {};
     const vehicleTypeList = {};
     const colorList = Object.values(color);
+    const colorKeys = Object.keys(color);
     let colorIdx = 0;
     const child = timestep.children;
     for(let i=0; i<child.length; i=i+1){
@@ -62,10 +63,16 @@ const getVehicleInfo = (typeIdMap,timestep,elapsedtime,setVehicletype)=>{
             if(type){
                 operation[vehicleType] = type;
                 if(vehicle.tagName === 'vehicle' && !(type in vehicleTypeList)){
-                    vehicleTypeList[type] = {color:colorList[colorIdx],scale:1.5};
+                    vehicleTypeList[type] = {color:colorList[colorIdx],scale:1.5,colorName:colorKeys[colorIdx]};
                     colorIdx = colorIdx + 1;
                     if(colorIdx >= colorList.length) colorIdx = 0;
                 }
+            }
+            if(vehicle.tagName === 'person' && !(vehicle.tagName in vehicleTypeList)){
+                vehicleTypeList[vehicle.tagName] = {color:color.maroon,colorName:'maroon'};
+            }
+            if(vehicle.tagName === 'container' && !(vehicle.tagName in vehicleTypeList)){
+                vehicleTypeList[vehicle.tagName] = {color:color.teal,colorName:'teal'};
             }
             if(speed)operation['speed'] = parseFloat(speed);
             if(angle)operation['angle'] = parseFloat(angle);

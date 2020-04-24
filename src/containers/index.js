@@ -94,7 +94,7 @@ class App extends Container {
                 iconDesignations:[
                   {type:'vehicle', layer:'SimpleMesh', getColor:vehicleColor, sizeScale:1, getScale:vehicleScale},
                   {type:'person', layer:'Scatterplot', getColor:()=>color.maroon, getRadius:()=>2},
-                  {type:'container', layer:'SimpleMesh', getColor:()=>color.teal, getRadius:()=>2}
+                  {type:'container', layer:'SimpleMesh', getColor:()=>color.teal, getRadius:()=>[1,1,1]}
                 ],
                 clickedObject, actions, optionVisible, onHover }),
             ]}
