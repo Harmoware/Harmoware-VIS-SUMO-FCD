@@ -65,15 +65,22 @@ class App extends Container {
       if(x.vehicletype && x.vehicletype in vehicletype){
         return vehicletype[x.vehicletype].color;
       }else{
+        if(x.tagName && x.tagName !== 'vehicle'){
+          return vehicletype[x.tagName].color;
+        }
         return color.lime;
       }
     }
     const vehicleScale = (x)=>{
       const {vehicletype} = this.state;
       if(x.vehicletype && x.vehicletype in vehicletype){
-        const {scale} = vehicletype[x.vehicletype];
-        return [scale,scale,scale];
+        const {size} = vehicletype[x.vehicletype];
+        return [size,size,size];
       }else{
+        if(x.tagName && x.tagName !== 'vehicle'){
+          const {size} = vehicletype[x.tagName];
+          return [size,size,size];
+        }
         return [1.5,1.5,1.5];
       }
     }
@@ -93,8 +100,8 @@ class App extends Container {
                 movesbase, movedData,
                 iconDesignations:[
                   {type:'vehicle', layer:'SimpleMesh', getColor:vehicleColor, sizeScale:1, getScale:vehicleScale},
-                  {type:'person', layer:'Scatterplot', getColor:()=>color.maroon, getRadius:()=>2},
-                  {type:'container', layer:'SimpleMesh', getColor:()=>color.teal, getRadius:()=>[1,1,1]}
+                  {type:'person', layer:'Scatterplot', getColor:vehicleColor, getRadius:()=>2},
+                  {type:'container', layer:'Scatterplot', getColor:vehicleColor, sizeScale:()=>2}
                 ],
                 clickedObject, actions, optionVisible, onHover }),
             ]}

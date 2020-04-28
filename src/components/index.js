@@ -55,7 +55,7 @@ export default class Controller extends React.Component {
               <SpeedValue secperhour={secperhour} actions={actions} />sec/hour</label>
               <SpeedRange secperhour={secperhour} actions={actions} id="SpeedRange" />
             </li>
-              <VehicletypeList vehicletype={vehicletype} />
+            <VehicletypeList vehicletype={vehicletype} setVehicletype={setVehicletype}/>
             </ul>
         </div>
     );
