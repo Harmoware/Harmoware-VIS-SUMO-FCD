@@ -7,7 +7,7 @@ import { PlayButton, PauseButton, ForwardButton, ReverseButton,
   
 export default class Controller extends React.Component {
   render() {
-    const { actions, inputFileName, animatePause, animateReverse, viewport,
+    const { actions, inputFileName, animatePause, animateReverse, viewport, leading,
       settime, timeBegin, timeLength, secperhour, setVehicletype, vehicletype } = this.props;
     const { movesFileName } = inputFileName;
 
@@ -45,10 +45,11 @@ export default class Controller extends React.Component {
             </li>
             <li className="flex_column">
               <label htmlFor="ElapsedTimeRange">elapsedTime
-              <ElapsedTimeValue settime={settime} timeBegin={timeBegin} timeLength={timeLength} actions={actions} />
+              <ElapsedTimeValue settime={settime} timeBegin={timeBegin} timeLength={timeLength} actions={actions}
+              min={leading*-1} />
               sec</label>
               <ElapsedTimeRange settime={settime} timeLength={timeLength} timeBegin={timeBegin} actions={actions}
-              id="ElapsedTimeRange" />
+              min={leading*-1} id="ElapsedTimeRange" />
             </li>
             <li className="flex_column">
               <label htmlFor="SpeedRange">speed
