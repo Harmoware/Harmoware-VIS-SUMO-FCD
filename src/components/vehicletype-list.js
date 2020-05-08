@@ -8,13 +8,11 @@ class LegendList extends React.Component{
         if(id === 'size-up'){
             size = size + 0.5;
             vehicletype[type].size = size;
-            setVehicletype(vehicletype);
         }else
         if(id === 'size-down'){
             size = size - 0.5;
             if(size < 0) size = 0;
             vehicletype[type].size = size;
-            setVehicletype(vehicletype);
         }else
         if(id === 'color'){
             const colorNames = Object.keys(colorList);
@@ -23,10 +21,8 @@ class LegendList extends React.Component{
             if(idx >= colorNames.length) idx = 0;
             vehicletype[type].color = colorList[colorNames[idx]];
             vehicletype[type].colorName = colorNames[idx];
-            setVehicletype(vehicletype);
-        }else{
-            setVehicletype(vehicletype);
         }
+        setVehicletype(vehicletype);
     }
     render(){
         const {vehicletype,className} = this.props;
@@ -38,9 +34,8 @@ class LegendList extends React.Component{
                         className={className}>＋</button>
                     <button onClick={this.onClick.bind(this,'size-down',type)}
                         className={className}>－</button>
-                    <button onClick={this.onClick.bind(this,'color',type)} className={className}>
-                        <font style={{color:vehicletype[type].colorName, fontSize:'12pt'}}>■</font>
-                    </button>&nbsp;
+                    <button onClick={this.onClick.bind(this,'color',type)} className={className}
+                        style={{background:vehicletype[type].colorName}}>&nbsp;</button>&nbsp;
                     {type}
                 </li>
             );
