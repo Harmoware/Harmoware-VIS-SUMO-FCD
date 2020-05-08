@@ -38,6 +38,7 @@ export const MovesInput = (props)=>{
     };
 
     const onClick = (e)=>{
+        setVehicletype({});
         actions.setInputFilename({ movesFileName: null });
         actions.setMovesBase([]);
         e.target.value = '';

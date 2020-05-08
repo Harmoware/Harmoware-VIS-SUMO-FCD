@@ -6,20 +6,24 @@ div.harmovis_controller {
   ul {
     @extend ul.flex_list;
   }
-  li.bus3d_input_button_column {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    button {
-      @extend .harmovis_button;
-    }
-    div {
-      white-space: nowrap;
-      overflow: hidden;
-      text-Overflow: ellipsis;
-    }
+  ol {
+    padding-inline-start: 10px;
+  }
+  li.none_display {
+    width: 0%;  
+    display: none;
   }
   button.harmovis_button {
     width: 100%;  
   }
+  button.size_button {
+    @extend button.harmovis_button;
+    font-size: 10px; 
+    padding: 3px 6px;
+    width: auto;  
+  }
+}
+div.harmovis_footer {
+  @extend .harmovis_footer;
+  left: 100px;
 }

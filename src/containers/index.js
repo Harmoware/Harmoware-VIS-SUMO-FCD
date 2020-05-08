@@ -27,15 +27,15 @@ class App extends Container {
     actions.setViewport({longitude:136.816929,latitude:34.859429,zoom:15});
   }
 
+  setVehicletype(vehicletype){
+    this.setState({vehicletype});
+  }
+
   render() {
     const { actions, clickedObject, viewport,
       routePaths, movesbase, movedData, loading } = this.props;
     const optionVisible = false;
-    const style = {left: '100px'};
 
-    const setVehicletype = (vehicletype)=>{
-      this.setState({vehicletype});
-    }
 
     const onHover = (el) => {
       if (el && el.object) {
@@ -84,10 +84,24 @@ class App extends Container {
         return [1.5,1.5,1.5];
       }
     }
+    const vehicleRadius = (x)=>{
+      const {vehicletype} = this.state;
+      if(x.vehicletype && x.vehicletype in vehicletype){
+        const {size} = vehicletype[x.vehicletype];
+        return size;
+      }else{
+        if(x.tagName && x.tagName !== 'vehicle'){
+          const {size} = vehicletype[x.tagName];
+          return size;
+        }
+        return 2;
+      }
+    }
 
     return (
       <div>
-        <Controller {...this.props} setVehicletype={setVehicletype} vehicletype={this.state.vehicletype} />
+        <Controller {...this.props} setVehicletype={this.setVehicletype.bind(this)}
+          vehicletype={this.state.vehicletype} />
         <div className="harmovis_area">
           <HarmoVisLayers
             viewport={viewport} actions={actions}
@@ -100,14 +114,14 @@ class App extends Container {
                 movesbase, movedData,
                 iconDesignations:[
                   {type:'vehicle', layer:'SimpleMesh', getColor:vehicleColor, sizeScale:1, getScale:vehicleScale},
-                  {type:'person', layer:'Scatterplot', getColor:vehicleColor, getRadius:()=>2},
-                  {type:'container', layer:'Scatterplot', getColor:vehicleColor, sizeScale:()=>2}
+                  {type:'person', layer:'Scatterplot', getColor:vehicleColor, getRadius:vehicleRadius},
+                  {type:'container', layer:'Scatterplot', getColor:vehicleColor, getRadius:vehicleRadius}
                 ],
                 clickedObject, actions, optionVisible, onHover }),
             ]}
           />
         </div>
-        <div className="harmovis_footer" style={style}>
+        <div className="harmovis_footer">
           longitude:{viewport.longitude}&nbsp;
           latitude:{viewport.latitude}&nbsp;
           zoom:{viewport.zoom}&nbsp;
