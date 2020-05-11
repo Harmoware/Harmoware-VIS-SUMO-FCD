@@ -52,8 +52,10 @@ export class VehicletypeList extends React.Component{
         const length = Object.keys(vehicletype).length;
     
         return (
-            <li>{length > 0 ? 'legend':null}
-            <ol><LegendList {...this.props}/></ol>
+            <li className="flex_column">
+                <label>{length > 0 ? 'legend':null}
+                    <ol><LegendList {...this.props}/></ol>
+                </label>
             </li>
         );
     }
