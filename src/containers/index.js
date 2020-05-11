@@ -32,6 +32,7 @@ class App extends Container {
   }
 
   render() {
+    const {vehicletype} = this.state;
     const { actions, clickedObject, viewport,
       routePaths, movesbase, movedData, loading } = this.props;
     const optionVisible = false;
@@ -61,7 +62,6 @@ class App extends Container {
     };
 
     const vehicleColor = (x)=>{
-      const {vehicletype} = this.state;
       if(x.vehicletype && x.vehicletype in vehicletype){
         return vehicletype[x.vehicletype].color;
       }else{
@@ -72,7 +72,6 @@ class App extends Container {
       }
     }
     const vehicleScale = (x)=>{
-      const {vehicletype} = this.state;
       if(x.vehicletype && x.vehicletype in vehicletype){
         const {size} = vehicletype[x.vehicletype];
         return [size,size,size];
@@ -85,7 +84,6 @@ class App extends Container {
       }
     }
     const vehicleRadius = (x)=>{
-      const {vehicletype} = this.state;
       if(x.vehicletype && x.vehicletype in vehicletype){
         const {size} = vehicletype[x.vehicletype];
         return size;
@@ -101,7 +99,7 @@ class App extends Container {
     return (
       <div>
         <Controller {...this.props} setVehicletype={this.setVehicletype.bind(this)}
-          vehicletype={this.state.vehicletype} />
+          vehicletype={vehicletype} />
         <div className="harmovis_area">
           <HarmoVisLayers
             viewport={viewport} actions={actions}
