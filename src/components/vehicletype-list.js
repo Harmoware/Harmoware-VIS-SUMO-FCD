@@ -12,7 +12,7 @@ class LegendList extends React.Component{
         if(id === 'size-down'){
             size = size - 0.5;
             if(size < 0) size = 0;
-            vehicletype[type].size = size;
+            vehicletype[type].size = size || 0.1;
         }else
         if(id === 'color'){
             const colorNames = Object.keys(colorList);
