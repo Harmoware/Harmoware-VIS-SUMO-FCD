@@ -28,16 +28,19 @@ class LegendList extends React.Component{
         const {vehicletype,className} = this.props;
         const types = Object.keys(vehicletype);
         if(types.length > 0){
-            return types.map((type)=>
-                <li key={type} className="flex_row">
-                    <button onClick={this.onClick.bind(this,'size-up',type)}
-                        className={className}>＋</button>
-                    <button onClick={this.onClick.bind(this,'size-down',type)}
-                        className={className}>－</button>
-                    <button onClick={this.onClick.bind(this,'color',type)} className={className}
-                        style={{background:vehicletype[type].colorName}}>&nbsp;</button>&nbsp;
-                    {type}
-                </li>
+            return (
+                <label>legend
+                    <ol>{types.map((type)=>
+                        <li key={type} className="flex_row">
+                            <button onClick={this.onClick.bind(this,'size-up',type)}
+                                className={className}>＋</button>
+                            <button onClick={this.onClick.bind(this,'size-down',type)}
+                                className={className}>－</button>
+                            <button onClick={this.onClick.bind(this,'color',type)} className={className}
+                                style={{background:vehicletype[type].colorName}}>&nbsp;</button>&nbsp;
+                            {type}
+                        </li>)}</ol>
+                </label>
             );
         }else{
             return null;
@@ -53,9 +56,7 @@ export class VehicletypeList extends React.Component{
     
         return (
             <li className="flex_column">
-                <label>{length > 0 ? 'legend':null}
-                    <ol><LegendList {...this.props}/></ol>
-                </label>
+                <LegendList {...this.props}/>
             </li>
         );
     }
