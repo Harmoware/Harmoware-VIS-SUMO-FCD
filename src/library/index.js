@@ -18,10 +18,10 @@ const getTimestepInfo = (timeBegin,fcd,setVehicletype)=>{
     for(let i=0; i<child.length; i=i+1) {
         const timestep = child[i];
         if(timestep.tagName === 'timestep'){
-            const {time} = getAttributes(timestep);
+            const {time,...other1} = getAttributes(timestep);
             if(time){
                 const elapsedtime = timeBegin + parseFloat(time);
-                typeIdMap = getVehicleInfo(typeIdMap,timestep,elapsedtime,setVehicletype);
+                typeIdMap = getVehicleInfo({typeIdMap,timestep,elapsedtime,setVehicletype,...other1});
             }else{
                 console.log('undefined timestep.tagName => ' + timestep.tagName);
             }
@@ -32,7 +32,7 @@ const getTimestepInfo = (timeBegin,fcd,setVehicletype)=>{
     return Object.values(typeIdMap);
 }
 
-const getVehicleInfo = (typeIdMap,timestep,elapsedtime,setVehicletype)=>{
+const getVehicleInfo = ({typeIdMap,timestep,elapsedtime,setVehicletype,...other1})=>{
     const update = {};
     const vehicleTypeList = {};
     const colorList = Object.values(color);
@@ -43,7 +43,7 @@ const getVehicleInfo = (typeIdMap,timestep,elapsedtime,setVehicletype)=>{
         const vehicle = child[i];
         if(vehicle.tagName === 'vehicle' || vehicle.tagName === 'person' ||
             vehicle.tagName === 'container'){
-            const {id,type,x,y,speed,angle,pos,slope,...other} = getAttributes(vehicle);
+            const {id,type,x,y,speed,angle,pos,slope,...other2} = getAttributes(vehicle);
             if(!id||!x||!y) continue;
             const typeId = vehicle.tagName + id;
             let operation_array = [];
@@ -61,7 +61,7 @@ const getVehicleInfo = (typeIdMap,timestep,elapsedtime,setVehicletype)=>{
                 longitude:parseFloat(x),
                 latitude:parseFloat(y),
                 tagName:vehicle.tagName,
-                ...other};
+                ...other2,...other1};
             if(type){
                 operation[vehicleType] = type;
                 if(vehicle.tagName === 'vehicle' && !(type in vehicleTypeList)){
