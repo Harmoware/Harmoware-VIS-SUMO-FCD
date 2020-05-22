@@ -58,8 +58,7 @@ const getVehicleInfo = ({typeIdMap,timestep,elapsedtime,setVehicletype,...other1
             const vehicleType = vehicle.tagName + 'type';
             const operation = {
                 elapsedtime,
-                longitude:parseFloat(x),
-                latitude:parseFloat(y),
+                position:[parseFloat(x),parseFloat(y),0],
                 tagName:vehicle.tagName,
                 ...other2,...other1};
             if(type){

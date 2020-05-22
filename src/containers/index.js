@@ -118,7 +118,8 @@ class App extends Container {
                   {type:'person', layer:'Scenegraph', scenegraph:scenegraphPerson,
                     getColor:vehicleColor, sizeScale:1, getScale:vehicleScale},
                   {type:'container', layer:'Scenegraph', scenegraph:scenegraphContainer,
-                    getColor:vehicleColor, sizeScale:1, getScale:vehicleScale}
+                    getColor:vehicleColor, sizeScale:1, getScale:vehicleScale},
+                  {type:'container', layer:'Scatterplot', getColor:vehicleColor, getRadius:vehicleRadius}
                 ],
                 clickedObject, actions, optionVisible, onHover }),
             ]}
