@@ -5,7 +5,9 @@ import {
 import Controller from '../components';
 import { color } from '../library';
 
-
+const scenegraphVehicle = '../../icon/vehicle.glb';
+const scenegraphPerson = '../../icon/person.glb';
+const scenegraphContainer = '../../icon/container.glb';
 
 const MAPBOX_TOKEN = process.env.MAPBOX_ACCESS_TOKEN; //Acquire Mapbox accesstoken
 
@@ -21,10 +23,10 @@ class App extends Container {
   componentDidMount(){
     super.componentDidMount();
     const { actions } = this.props;
-    actions.setSecPerHour(360);
+    actions.setSecPerHour(720);
     actions.setLeading(10);
     actions.setTrailing(10);
-    actions.setViewport({longitude:136.816929,latitude:34.859429,zoom:15});
+    actions.setViewport({longitude:136.816929,latitude:34.859429,zoom:15,maxZoom:20});
   }
 
   setVehicletype(vehicletype){
@@ -111,9 +113,12 @@ class App extends Container {
                 getOrientation: (x) => (x.angle || x.direction) ? [0,((x.angle || x.direction) * -1),90] : [0,0,90],
                 movesbase, movedData,
                 iconDesignations:[
-                  {type:'vehicle', layer:'SimpleMesh', getColor:vehicleColor, sizeScale:1, getScale:vehicleScale},
-                  {type:'person', layer:'Scatterplot', getColor:vehicleColor, getRadius:vehicleRadius},
-                  {type:'container', layer:'Scatterplot', getColor:vehicleColor, getRadius:vehicleRadius}
+                  {type:'vehicle', layer:'Scenegraph', scenegraph:scenegraphVehicle,
+                    getColor:vehicleColor, sizeScale:1, getScale:vehicleScale},
+                  {type:'person', layer:'Scenegraph', scenegraph:scenegraphPerson,
+                    getColor:vehicleColor, sizeScale:1, getScale:vehicleScale},
+                  {type:'container', layer:'Scenegraph', scenegraph:scenegraphContainer,
+                    getColor:vehicleColor, sizeScale:1, getScale:vehicleScale}
                 ],
                 clickedObject, actions, optionVisible, onHover }),
             ]}
