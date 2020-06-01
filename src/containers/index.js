@@ -27,6 +27,7 @@ class App extends Container {
     actions.setLeading(10);
     actions.setTrailing(10);
     actions.setViewport({longitude:136.816929,latitude:34.859429,zoom:15,maxZoom:20});
+    actions.setDefaultViewport({defaultZoom:15});
   }
 
   setVehicletype(vehicletype){
