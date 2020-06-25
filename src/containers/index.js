@@ -16,7 +16,8 @@ class App extends Container {
     super(props);
     this.state = {
       popup: [0, 0, ''],
-      vehicletype: {}
+      vehicletype: {},
+      flyto: false
     };
   }
 
@@ -30,12 +31,18 @@ class App extends Container {
     actions.setDefaultViewport({defaultZoom:15});
   }
 
+  componentDidUpdate(){
+    if (!this.state.flyto) {
+      this.setState({flyto: true});
+    }
+  }
+
   setVehicletype(vehicletype){
     this.setState({vehicletype});
   }
 
   render() {
-    const {vehicletype} = this.state;
+    const {vehicletype, flyto} = this.state;
     const { actions, clickedObject, viewport,
       routePaths, movesbase, movedData, loading } = this.props;
     const optionVisible = false;
@@ -107,7 +114,7 @@ class App extends Container {
           <HarmoVisLayers
             viewport={viewport} actions={actions}
             mapboxApiAccessToken={MAPBOX_TOKEN}
-            mapStyle={undefined}
+            mapStyle={undefined} flyto={flyto}
             layers={[
               new MovesLayer({
                 routePaths, getRouteWidth:()=>2,
