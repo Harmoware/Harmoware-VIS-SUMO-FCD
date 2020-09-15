@@ -1,5 +1,6 @@
 import React from 'react';
 import { MovesInput } from './moves-input.js';
+import { MovesOutput } from './moves-output.js';
 import { VehicletypeList } from './vehicletype-list.js';
 import { PlayButton, PauseButton, ForwardButton, ReverseButton,
   AddMinutesButton, NavigationButton, ElapsedTimeValue, ElapsedTimeRange,
@@ -7,7 +8,7 @@ import { PlayButton, PauseButton, ForwardButton, ReverseButton,
   
 export default class Controller extends React.Component {
   render() {
-    const { actions, inputFileName, animatePause, animateReverse, viewport, leading,
+    const { actions, inputFileName, animatePause, animateReverse, viewport, leading, movesbase,
       settime, timeBegin, timeLength, secperhour, setVehicletype, vehicletype } = this.props;
     const { movesFileName } = inputFileName;
 
@@ -21,6 +22,9 @@ export default class Controller extends React.Component {
                 </label>
                 <div>{movesFileName}</div>
                 </div>
+            </li>
+            <li className="flex_row">
+                <MovesOutput actions={actions} id="MovesOutput" movesbase={movesbase}>FCD data download</MovesOutput>
             </li>
             <li className="flex_row">
               {animatePause ?
