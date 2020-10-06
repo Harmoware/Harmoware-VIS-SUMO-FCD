@@ -17,6 +17,7 @@ class App extends Container {
     this.state = {
       popup: [0, 0, ''],
       vehicletype: {},
+      initVehicletype: {},
       flyto: false
     };
   }
@@ -39,10 +40,16 @@ class App extends Container {
 
   setVehicletype(vehicletype){
     this.setState({vehicletype});
+    if(Object.entries(vehicletype).length === 0){
+      this.setState({initVehicletype:{}});
+    }
+    if(Object.entries(this.state.initVehicletype).length === 0){
+      this.setState({initVehicletype:vehicletype});
+    }
   }
 
   render() {
-    const {vehicletype, flyto} = this.state;
+    const {vehicletype, initVehicletype, flyto} = this.state;
     const { actions, clickedObject, viewport,
       routePaths, movesbase, movedData, loading } = this.props;
     const optionVisible = false;
@@ -109,7 +116,7 @@ class App extends Container {
     return (
       <div>
         <Controller {...this.props} setVehicletype={this.setVehicletype.bind(this)}
-          vehicletype={vehicletype} />
+          vehicletype={vehicletype} initVehicletype={initVehicletype}/>
         <div className="harmovis_area">
           <HarmoVisLayers
             viewport={viewport} actions={actions}

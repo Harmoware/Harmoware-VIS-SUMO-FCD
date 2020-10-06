@@ -9,7 +9,7 @@ import { PlayButton, PauseButton, ForwardButton, ReverseButton,
 export default class Controller extends React.Component {
   render() {
     const { actions, inputFileName, animatePause, animateReverse, viewport, leading, movesbase,
-      settime, timeBegin, timeLength, secperhour, setVehicletype, vehicletype } = this.props;
+      settime, timeBegin, timeLength, secperhour, setVehicletype, vehicletype, initVehicletype } = this.props;
     const { movesFileName } = inputFileName;
 
     return (
@@ -60,7 +60,7 @@ export default class Controller extends React.Component {
               <SpeedValue secperhour={secperhour} actions={actions} />sec/hour</label>
               <SpeedRange secperhour={secperhour} actions={actions} id="SpeedRange" />
             </li>
-            <VehicletypeList vehicletype={vehicletype} setVehicletype={setVehicletype}/>
+            <VehicletypeList vehicletype={vehicletype} setVehicletype={setVehicletype} initVehicletype={initVehicletype}/>
             </ul>
         </div>
     );

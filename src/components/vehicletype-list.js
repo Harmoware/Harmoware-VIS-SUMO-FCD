@@ -3,7 +3,7 @@ import { color as colorList } from '../library';
 
 class LegendList extends React.Component{
     onClick(id,type){
-        const {vehicletype,setVehicletype} = this.props;
+        const {vehicletype,initVehicletype,setVehicletype} = this.props;
         let {size,colorName} = vehicletype[type];
         if(id === 'size-up'){
             size = size + 0.5;
@@ -12,7 +12,7 @@ class LegendList extends React.Component{
         if(id === 'size-down'){
             size = size - 0.5;
             if(size < 0) size = 0;
-            vehicletype[type].size = size || 0.1;
+            vehicletype[type].size = size;
         }else
         if(id === 'color'){
             const colorNames = Object.keys(colorList);
@@ -21,6 +21,11 @@ class LegendList extends React.Component{
             if(idx >= colorNames.length) idx = 0;
             vehicletype[type].color = colorList[colorNames[idx]];
             vehicletype[type].colorName = colorNames[idx];
+        }else
+        if(id === 'reset'){
+            vehicletype[type].size = initVehicletype[type].size;
+            vehicletype[type].color = initVehicletype[type].color;
+            vehicletype[type].colorName = initVehicletype[type].colorName;
         }
         setVehicletype(vehicletype);
     }
@@ -33,11 +38,14 @@ class LegendList extends React.Component{
                     <ol>{types.map((type)=>
                         <li key={type} className="flex_row">
                             <button onClick={this.onClick.bind(this,'size-up',type)}
-                                className={className}>＋</button>
+                                 title='icon size up' className={className}>＋</button>
                             <button onClick={this.onClick.bind(this,'size-down',type)}
-                                className={className}>－</button>
+                                 title='icon size down' className={className}>－</button>
                             <button onClick={this.onClick.bind(this,'color',type)} className={className}
-                                style={{background:vehicletype[type].colorName}}>&nbsp;</button>&nbsp;
+                                 title='icon color change'
+                                 style={{background:vehicletype[type].colorName}}>&nbsp;</button>
+                            <button onClick={this.onClick.bind(this,'reset',type)}
+                                 title='icon reset' className={className}>R</button>&nbsp;
                             {type}
                         </li>)}</ol>
                 </label>
@@ -50,10 +58,6 @@ class LegendList extends React.Component{
 
 export class VehicletypeList extends React.Component{
     render(){
-        const {vehicletype} = this.props;
-
-        const length = Object.keys(vehicletype).length;
-    
         return (
             <li className="flex_column">
                 <LegendList {...this.props}/>
