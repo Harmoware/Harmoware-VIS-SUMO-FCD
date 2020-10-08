@@ -15,7 +15,7 @@ export default class Controller extends React.Component {
     return (
         <div className="harmovis_controller">
             <ul className="flex_list">
-            <li className="flex_row">
+            <li className="flex_row" title='FCD data selection'>
                 <div className="harmovis_input_button_column">
                 <label htmlFor="MovesInput">
                 FCD data selection<MovesInput actions={actions} id="MovesInput" setVehicletype={setVehicletype}/>
@@ -23,8 +23,8 @@ export default class Controller extends React.Component {
                 <div>{movesFileName}</div>
                 </div>
             </li>
-            <li className="flex_row">
-                <MovesOutput actions={actions} id="MovesOutput" movesbase={movesbase}>FCD data download</MovesOutput>
+            <li className="flex_row" title='Data download'>
+                <MovesOutput actions={actions} id="MovesOutput" movesbase={movesbase}>Data download</MovesOutput>
             </li>
             <li className="flex_row">
               {animatePause ?
