@@ -13,7 +13,7 @@ export const MovesOutput = (props)=>{
     };
 
     return (
-        <button className={className} onClick={onClick}>
+        <button className={className} onClick={onClick} disabled={movesbase.length===0}>
             <span style={style}>{children}</span>
         </button>
     );

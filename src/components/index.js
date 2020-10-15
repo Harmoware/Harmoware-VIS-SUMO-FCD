@@ -1,4 +1,6 @@
 import React from 'react';
+import { Icon } from 'react-icons-kit'
+import { download } from 'react-icons-kit/ikons/download'
 import { MovesInput } from './moves-input.js';
 import { MovesOutput } from './moves-output.js';
 import { VehicletypeList } from './vehicletype-list.js';
@@ -24,7 +26,7 @@ export default class Controller extends React.Component {
                 </div>
             </li>
             <li className="flex_row" title='Data download'>
-                <MovesOutput actions={actions} id="MovesOutput" movesbase={movesbase}>Data download</MovesOutput>
+                <MovesOutput actions={actions} id="MovesOutput" movesbase={movesbase}><Icon icon={download}/>&nbsp;Data download</MovesOutput>
             </li>
             <li className="flex_row">
               {animatePause ?
