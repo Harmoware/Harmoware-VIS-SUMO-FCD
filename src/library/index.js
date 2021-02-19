@@ -1,5 +1,5 @@
 export const analyzeSumoData = (inputData,setVehicletype)=>{
-    const timeBegin = Date.now();
+    const timeBegin = Math.trunc(Date.now()/1000);
     const root = inputData.children;
     for(let i=0; i<root.length; i=i+1) {
         const fcd = root[i];
