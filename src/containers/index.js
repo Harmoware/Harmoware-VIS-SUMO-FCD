@@ -5,11 +5,11 @@ import {
 import Controller from '../components';
 import { color } from '../library';
 
-const scenegraphVehicle = '../../icon/vehicle.glb';
-const scenegraphPerson = '../../icon/person.glb';
-const scenegraphContainer = '../../icon/container.glb';
+const scenegraphVehicle = 'icon/vehicle.glb';
+const scenegraphPerson = 'icon/person.glb';
+const scenegraphContainer = 'icon/container.glb';
 
-const MAPBOX_TOKEN = process.env.MAPBOX_ACCESS_TOKEN; //Acquire Mapbox accesstoken
+const MAPBOX_TOKEN = process.env.MAPBOX_ACCESS_TOKEN || 'pk.eyJ1IjoieW11Y3lzdGsiLCJhIjoiY2oxdmhhbmd0MDAwYjM4bXd1YWVodWNrcCJ9.aWxoDc0UXMVGB96b82GFKQ'; //Acquire Mapbox accesstoken
 
 class App extends Container {
   constructor(props) {
