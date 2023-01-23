@@ -17,6 +17,11 @@ export default class Controller extends React.Component {
     return (
         <div className="harmovis_controller">
             <ul className="flex_list">
+            {/* サーバーでダウンロードリンクを表示する際に使用
+            <li className="flex_row">
+              <a href="data/CentreaFcd.xml" download>Sample Data Download</a>
+            </li>
+            */}
             <li className="flex_row" title='FCD data selection'>
                 <div className="harmovis_input_button_column">
                 <label htmlFor="MovesInput">
