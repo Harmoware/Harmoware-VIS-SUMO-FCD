@@ -3,3 +3,5 @@ node_modules/*
 data/
 bundle.js
 bundle.js.map
+icon/eomoji.*
+icon/88-toyota-crown.glb
