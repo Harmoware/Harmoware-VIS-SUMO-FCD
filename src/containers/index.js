@@ -3,7 +3,7 @@ import {
   Container, connectToHarmowareVis, HarmoVisLayers, MovesLayer, LoadingIcon, FpsDisplay
 } from 'harmoware-vis';
 import Controller from '../components';
-import { color } from '../library';
+import { color, analyzeSumoData } from '../library';
 
 const scenegraphVehicle = 'icon/vehicle.glb';
 const scenegraphPerson = 'icon/person.glb';
@@ -30,6 +30,9 @@ class App extends Container {
     actions.setTrailing(10);
     actions.setViewport({longitude:136.816929,latitude:34.859429,zoom:15,maxZoom:20});
     actions.setDefaultViewport({defaultZoom:15});
+    setTimeout(()=>{InitialFileRead({actions:this.props.actions,
+      setVehicletype:this.setVehicletype.bind(this)})},1000);
+    console.log('componentDidMount')
   }
 
   componentDidUpdate(){
@@ -165,3 +168,35 @@ class App extends Container {
   }
 }
 export default connectToHarmowareVis(App);
+
+const InitialFileRead = (props)=>{
+  const { actions, setVehicletype } = props;
+  console.log('InitialFileRead')
+  const request = new XMLHttpRequest();
+  request.open('GET', 'data/CentreaFcd.xml');
+  request.responseType = 'text';
+  request.send();
+  actions.setLoading(true);
+  actions.setMovesBase([]);
+  request.onload = function() {
+    let readdata = null;
+    try {
+      const xml = request.response
+      console.log({xml})
+      const parser = new DOMParser()
+      readdata = analyzeSumoData(parser.parseFromString(xml, 'text/xml'),setVehicletype)
+    } catch (exception) {
+      console.log('InitialFileRead exception')
+      actions.setLoading(false);
+      return;
+    }
+    console.log({readdata})
+    actions.setInputFilename({ depotsFileName: 'sample data' });
+    actions.setMovesBase(readdata);
+    actions.setRoutePaths([]);
+    actions.setClicked(null);
+    actions.setAnimatePause(false);
+    actions.setAnimateReverse(false);
+    actions.setLoading(false);
+  }
+}
