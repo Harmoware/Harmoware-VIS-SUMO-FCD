@@ -72,7 +72,7 @@ class App extends Container {
           objctlist[i][0] === 'signals' || objctlist[i][0] === 'edge' ||
           objctlist[i][0] === 'vehicletype' || objctlist[i][0] === 'persontype' ||
           objctlist[i][0] === 'containertype'){
-            const strvalue = arrStrConv(objctlist[i][1]).toString();
+            const strvalue = arrStrConv(objctlist[i][1]);
             disptext = disptext + (disptext.length > 0 ? '\n' : '');
             disptext = disptext + (`${objctlist[i][0]}: ${strvalue}`);
           }
