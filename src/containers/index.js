@@ -11,6 +11,8 @@ const scenegraphContainer = 'icon/container.glb';
 
 const MAPBOX_TOKEN = process.env.MAPBOX_ACCESS_TOKEN || 'pk.eyJ1IjoieW11Y3lzdGsiLCJhIjoiY2oxdmhhbmd0MDAwYjM4bXd1YWVodWNrcCJ9.aWxoDc0UXMVGB96b82GFKQ'; //Acquire Mapbox accesstoken
 
+const arrStrConv = (value)=>Array.isArray(value)?`[${value.map(el=>arrStrConv(el))}]`:value.toString()
+
 class App extends Container {
   constructor(props) {
     super(props);
@@ -67,7 +69,7 @@ class App extends Container {
           objctlist[i][0] === 'signals' || objctlist[i][0] === 'edge' ||
           objctlist[i][0] === 'vehicletype' || objctlist[i][0] === 'persontype' ||
           objctlist[i][0] === 'containertype'){
-            const strvalue = objctlist[i][1].toString();
+            const strvalue = arrStrConv(objctlist[i][1]);
             disptext = disptext + (disptext.length > 0 ? '\n' : '');
             disptext = disptext + (`${objctlist[i][0]}: ${strvalue}`);
           }
